@@ -57,7 +57,7 @@ Make a scatterplot of the number of rings (on y-axis) by shell weight (on x-axis
 
 Note: The number of rings range from `r min(abalone$rings)` to `r max(abalone$rings)`.
 
-Also the mean of the abalone heights is `mean(abalone$height, na.rm=TRUE)` and the standard deviaiton of heights is `sd(abalone$height, na.rm=TRUE)`.
+Also the mean of the abalone heights is `r mean(abalone$height, na.rm=TRUE)` and the standard deviaiton of heights is `r sd(abalone$height, na.rm=TRUE)`.
 
 ```{r plot}
 # make plot of number of rings by shellWeight

@@ -1,6 +1,12 @@
 # N741_Spring2020_Homework01_RMarkdown
 N741-Spring2020: Homework01 Editing RMarkdown and R Code
 
+## ANSWER KEY FILES are now posted
+
+* rmarkdown01_answerKey.Rmd
+* rmarkdown01_answerKey.html
+* rmarkdown01_answerKey.pdf
+
 ## Homework 1: DUE 01/29/2020
 
 This homework focuses on getting started using R, RStudio and Rmarkdown to create a report combining data, code and documentation together.
@@ -25,3 +31,6 @@ Complete the following:
     - In RStudio.cloud you can `knit` directly to PDF - you may be prompted to install the `tinytex` `R` package. Learn more at https://yihui.name/tinytex/.
 
 * NOTE: You should have 6 sections in your final updated report for Homework 01 - the 4 original section plus the 2 new sections (histogram and scatterplot) you are asked to create above.
+
+---
+

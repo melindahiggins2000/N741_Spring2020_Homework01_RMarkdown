@@ -1,0 +1,104 @@
+---
+title: "Abalones - Answer Key for Homework 1"
+author: "Melinda Higgins - Instructor for N741 Spring 2020"
+date: "Feb 7, 2020"
+output:
+  pdf_document: default
+  html_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+# set up knitr options for all code chunks
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(error = FALSE)
+
+# load packages needed for code chunks
+library(readr)
+library(tibble)
+library(dplyr)
+library(ggplot2)
+
+# import abalone.csv dataset
+# use read_csv()
+# function from readr to import data
+abalone <- read_csv(file = "abalone.csv")
+```
+
+## A Glimpse of the Abalone Dataset
+
+Use the `glimpse()` function from the `tibble` package to take a peak at the **abalone** dataset.
+
+```{r dataglimpse}
+# get a glimpse of the data
+# use glimpse() function from tibble package
+glimpse(x = abalone)
+```
+
+## Summary of abalone dimensions
+
+1. Select three variables from the **abalone** dataset: _length_, _diameter_, and _height_.
+2. Run the `summary()` function to get some basic descriptive statistics.
+
+```{r summary}
+# select a few variables
+# and get summary stats
+abalone %>% 
+  select(length, diameter, height) %>% 
+  summary()
+```
+
+## Plot of number of rings by shell weight
+
+Make a scatterplot of the number of rings (on y-axis) by shell weight (on x-axis) and put plots in 3 separate panels by sex (i.e., male, female and infant) and add a smoothed fit line to each plot.
+
+Note: The number of rings range from `r min(abalone$rings)` to `r max(abalone$rings)`.
+
+Also the mean of the abalone heights is `mean(abalone$height, na.rm=TRUE)` and the standard deviaiton of heights is `sd(abalone$height, na.rm=TRUE)`.
+
+```{r plot}
+# make plot of number of rings by shellWeight
+ggplot(data = abalone, 
+       aes(x = shellWeight, y = rings, color = sex)) +
+  geom_point() +
+  facet_wrap(vars(sex)) +
+  geom_smooth()
+```
+
+## Histogram of abalone rings
+
+```{r}
+ggplot(data = abalone, 
+       aes(x = rings)) +
+  geom_histogram(color = "black", fill = "blue")
+```
+
+The distribution looks close to normal with slightly more peaked in the middle (positive kurtosis) and with some slight skewness to the right (longer tail to the right)> There is also an odd skipped histogram bar around rings=15, This may be due to the default bin width.
+
+## Regression of abalone rings by shell weight
+
+We can save regression model results, then put the model coefficients from the `summary()` function into a nice table using the `kable()` function from the `knitr` package.
+
+```{r regmodel}
+model1 <- lm(formula = rings ~ shellWeight, 
+             data = abalone)
+sum_model1 <- summary(model1)
+knitr::kable(sum_model1$coefficients)
+```
+
+## Scatterplot of shucked weight (y-axis) by viscera weight (x-axis)
+
+```{r plot2}
+# make plot of number of rings by shellWeight
+ggplot(data = abalone, 
+       aes(x = visceraWeight, y = shuckedWeight, color = sex)) +
+  geom_point() +
+  facet_wrap(vars(sex)) +
+  geom_smooth()
+```
+
+There appears to be strong correlation between viscera weight and shucked weight. The slopes of the lines appear to be similar between the 3 sexes.
+
